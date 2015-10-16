@@ -25,37 +25,32 @@
 #instructions specified in the assignment description to hand-in your work.
 
 def palindrome?(str)
-  # YOUR CODE HERE
+ temp = str
+ downCaseStr = temp.downcase
+ removedStr = downCaseStr.gsub(/\W|\d/, "")
+ reversedStr = removedStr.reverse
+ if(reversedStr == removedStr)
+    return true
+ else
+    return false
+ end
 end
 
 def count_words(str)
-  # YOUR CODE HERE
+  downCaseStr = str.downcase
+  words = downCaseStr.split(/\W|\b+/)
+  
+  words.each{|i| 
+    i.gsub!(/\W|\d/,"")
+  }
+  
+  wordHash = Hash.new(1)
+  words.each{|i| 
+    if wordHash.has_key?(i)
+        wordHash[i] += 1
+    elsif(i != "")
+        wordHash[i] = 1
+    end
+  }
+  return wordHash
 end
-
-
-#the code below this line will test your functions. 
-#You should remove everything below this line prior to submitting your file
-
-
-test_str = "there goes the neighborhood"
-
-if palindrome? test_str
-  puts test_str + " is a palindrome!"
-else
-  puts test_str + " is NOT a palindrome!"
-end
-
-
-test_str = "Madam, I'm Adam"
-
-if palindrome? test_str
-  puts test_str + " is a palindrome!"
-else
-  puts test_str + " is NOT a palindrome!"
-end
-
-
-test_str = "The rent is due on the first day of the month unless the first day of the month falls on a Saturday or Sunday"
-
-word_count = count_words test_str
-puts word_count
